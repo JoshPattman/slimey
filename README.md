@@ -2,7 +2,7 @@
 
 A mesmerizing particle simulation written in Go using the Pixel game library. Watch as thousands of particles create beautiful patterns through pheromone trails.
 
-![Particle Simulation](conver.png)
+![Particle Simulation](cover.png)
 
 ## Features
 

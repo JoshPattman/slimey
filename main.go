@@ -28,6 +28,7 @@ var (
 	PHEREMONE_RATE          float64
 	PHEREMONE_DECAY         float64
 	PROFILE                 bool
+	NO_PARTICLES            bool
 )
 
 func parseFlags() {
@@ -40,6 +41,7 @@ func parseFlags() {
 	flag.Float64Var(&PHEREMONE_RATE, "pher-rate", 1.0, "rate of dropping pheremones")
 	flag.Float64Var(&PHEREMONE_DECAY, "pher-decay", 0.99, "decay rate of pheremones")
 	flag.BoolVar(&PROFILE, "prof", false, "periodically print debug statistics out?")
+	flag.BoolVar(&NO_PARTICLES, "no-particles", false, "disable particles (the grid will still be rendered)")
 
 	flag.Parse()
 }
@@ -103,8 +105,10 @@ func run() {
 		bgSprite, bgMat := grid.Sprite()
 
 		particleBatch.Clear()
-		for _, p := range particles {
-			particleSprite.Draw(particleBatch, pixel.IM.Scaled(pixel.ZV, 0.05).Moved(p.Pos))
+		if !NO_PARTICLES {
+			for _, p := range particles {
+				particleSprite.Draw(particleBatch, pixel.IM.Scaled(pixel.ZV, 0.05).Moved(p.Pos))
+			}
 		}
 		drawingTime += time.Since(startDrawing)
 
